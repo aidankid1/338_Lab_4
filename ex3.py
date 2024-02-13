@@ -1,3 +1,12 @@
+
+#1:
+#The strategy for growth is to have mild amounts of overallocation, just enough to give linear time amortization
+#over a long sequence of appends. As well as always being a multiple of 4. It follows the sequence 
+#0,4,8,16,24,32,40,52,64,76 as described on lines 60-68 in the lists.c file.
+#5:
+#It takes slightly longer to increase the array size from S to S+1 then it does to increase it from S-1 to S.
+#this makes sense as increasing to S+1 requires the copying of 12 additional elements and additionally it is 
+#more likely that the array will have to be moved to a new pace in memory.
 import sys
 import timeit
 from matplotlib import pyplot as plt
