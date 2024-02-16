@@ -28,18 +28,14 @@ def efficientSearch (array, first, last, key):
 INPUT_SIZE = 1000
 ITERATIONS = 100
 
-avg_efficient = []
-avg_inefficient = []
-for i in range(ITERATIONS):
-    randList = [random.randint(0, INPUT_SIZE) for _ in range(INPUT_SIZE)]
-    randList.sort()
-    target = random.choice(randList)   
-    avg_inefficient.append(timeit.timeit(lambda: inefficientSearch(randList, target), number=1))
-    avg_efficient.append(timeit.timeit(lambda: efficientSearch(randList, 0, len(randList) - 1, target), number=1))
+randList = random.sample(range(0, INPUT_SIZE), INPUT_SIZE) #Random Sample of X elements
+randList.sort() #Sorts before testing both searching algorithm
+avg_inefficient = timeit.repeat(lambda: inefficientSearch(randList, random.choice(randList)), repeat=ITERATIONS, number=1)
+avg_efficient = timeit.repeat(lambda: efficientSearch(randList, 0, len(randList) - 1, random.choice(randList)), repeat=ITERATIONS, number=1)
 
 plt.xlabel('Average Time (s)')
 plt.ylabel('Frequency')
-plt.hist(avg_efficient, bins=10, alpha=0.5, label='Binary Search')
-plt.hist(avg_inefficient, bins=10, alpha=0.4, label='Linear Search')
+plt.hist(avg_efficient, bins=10, alpha=0.5, label='Efficient (Binary)')
+plt.hist(avg_inefficient, bins=10, alpha=0.4, label='Inefficient (Linear)')
 plt.legend()
 plt.show()
