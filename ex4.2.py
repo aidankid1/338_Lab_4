@@ -25,13 +25,14 @@ def efficientSearch (array, first, last, key):
 #   The worst case for efficientSearch is O(nlog(n)) as it must go through the whole list halved each time.
 
 #5) 
+#Constants for timeit
 INPUT_SIZE = 1000
 ITERATIONS = 100
 
 randList = random.sample(range(0, INPUT_SIZE), INPUT_SIZE) #Random Sample of X elements
 randList.sort() #Sorts before testing both searching algorithm
-avg_inefficient = timeit.repeat(lambda: inefficientSearch(randList, random.choice(randList)), repeat=ITERATIONS, number=1)
-avg_efficient = timeit.repeat(lambda: efficientSearch(randList, 0, len(randList) - 1, random.choice(randList)), repeat=ITERATIONS, number=1)
+avg_inefficient = timeit.repeat(lambda: inefficientSearch(randList, random.choice(randList)), repeat=ITERATIONS, number=1) #Linear Search
+avg_efficient = timeit.repeat(lambda: efficientSearch(randList, 0, len(randList) - 1, random.choice(randList)), repeat=ITERATIONS, number=1) #Binary Search
 
 plt.xlabel('Average Time (s)')
 plt.ylabel('Frequency')
