@@ -67,3 +67,7 @@ def binary_search(head, num):
     # value not present
     return None
 
+# 4)
+
+# 5)
+INPUT_SIZE = [1000, 2000, 4000, 8000]
