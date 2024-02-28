@@ -50,24 +50,27 @@ def binarySearchList(head, value):
 
 # 3) Array Class used to store integers
 class Array:
+    #Constructor
     def __init__(self, arr):
         self.arr = arr
     
-    def len(self):
-        return len(self.arr)
-    
-    def get(self, index):
+    #Gets value at index
+    def getValue(self, index):
         return self.arr[index]
     
-#Binary Search for Arrays O(log(n))
+    #Gets length of array
+    def getLength(self):
+        return len(self.arr)
+    
+#Binary Search for Array
 def binarySearchArray (arr, first, last, key):
     if (first <= last):
         mid = (first + last) // 2
-        if(key == arr.get(mid)):
+        if(key == arr.getValue(mid)):
             return mid
-        elif(key < arr.get(mid)):
+        elif(key < arr.getValue(mid)):
             return binarySearchArray(arr, first, mid - 1, key)
-        elif(key > arr.get(mid)):
+        elif(key > arr.getValue(mid)):
             return binarySearchArray(arr, mid + 1, last, key)
     return -1 #Key was not found in the array
 
@@ -106,8 +109,8 @@ for size in INPUT_SIZE:
     head = populateList(size)
 
     #To ensure it is randomized the best it can, the key is randomized for each iteration of our test
-    linkedListBinary = timeit.repeat(lambda: binarySearchList(head, randArray.get(random.randint(0, size - 1))), repeat=ITERATIONS, number=1)
-    arrayBinary = timeit.repeat(lambda: binarySearchArray(randArray, 0, randArray.len() - 1, randArray.get(random.randint(0, size - 1))), repeat=ITERATIONS, number=1)
+    linkedListBinary = timeit.repeat(lambda: binarySearchList(head, randArray.getValue(random.randint(0, size - 1))), repeat=ITERATIONS, number=1)
+    arrayBinary = timeit.repeat(lambda: binarySearchArray(randArray, 0, randArray.getLength() - 1, randArray.getValue(random.randint(0, size - 1))), repeat=ITERATIONS, number=1)
 
     #Sum up the times for each input size and divides it by the # of times it was ran
     avgLinkedList.append(sum(linkedListBinary) / ITERATIONS)
